@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Movies</title>
+    <style>
+        .button {
+            background-color: chartreuse;
+            width: 30%;
+            font-size: 150%;
+            border-radius: 10%;
+        }
+
+        .button:hover{
+            opacity: 0.7;
+        }
+
+        li {
+            border: 2px;
+            border-style: solid;
+            background-color: #eee;
+            padding: 0.5% 0%;
+            font-size: 30px;
+            text-align: center;
+            margin: auto;
+            transform: translateY(0);
+            transition: 0.2s;
+        }
+        li:hover{
+            background-color: #666;
+            color: white;
+            transform: translateY(-10);
+        }
+        
+        .full {
+            width: 90%;
+            height: 100%;
+            margin: 2% 5%;
+            padding-bottom: 100%;
+            background-color: cadetblue;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .deleteButton{
+            float: right;
+            height: 32px;
+            border-radius: 10%;
+            transition: 0.2s;
+            img{
+                height: 25px;
+            }
+        }
+        .deleteButton:hover{
+            background-color: black;
+        }
+    </style>
+</head>
+
+<body style="background-color: gray;">
+    <div class="full">
+        <div style="font-size: 50px;">movie count:</div>
+        <div id="counter" style="font-size: 50px; color: red;">0</div>
+        <div style="padding: 2% 5%;">
+            <input type="text" style="width: 60%; font-size: 150%; " id="itemInput">
+            <button class="button" onclick="addItem()">Add</button>
+            <ul id="itemList">
+                <li>test</li>
+            </ul>
+            <button style="background-color: red;" class="button" onclick="clearList()">Clear List</button>
+        </div>
+    </div>
+    <script>
+        let list = [];
+
+        function displayList() {
+            const ul = document.getElementById("itemList");
+            ul.innerHTML = "";
+            list.forEach(item => {
+                const li = document.createElement("li");
+                li.textContent = item;
+
+                const deleteButton = document.createElement("button");
+                deleteButton.className = "deleteButton";
+                
+                const deleteImage = document.createElement("img");
+                deleteImage.src = "https://img.icons8.com/ios-filled/50/ff0000/trash.png";  // Image URL for the trash icon
+                deleteImage.alt = "Delete";
+
+                deleteButton.appendChild(deleteImage);
+
+                deleteButton.onclick = function () {
+                    removeItem(item);
+                };
+
+                li.appendChild(deleteButton);
+                ul.appendChild(li);
+            });
+            document.getElementById("counter").textContent = list.length;
+        }
+
+
+        function addItem() {
+            const input = document.getElementById("itemInput");
+            const newItem = input.value.trim();
+            if (newItem) {
+                list.push(newItem);
+                input.value = "";
+                displayList();
+            }
+        }
+
+
+        function removeItem() {
+            const input = document.getElementById("removeItemInput");
+            const removeItem = input.value.trim();
+            if (removeItem) {
+                const index = list.indexOf(removeItem);
+                if (index !== -1) {
+                    list.splice(index, 1);
+                    input.value = "";
+                    displayList();
+                } else {
+                    alert("Item not found in the list");
+                }
+            }
+        }
+
+        function removeItem(itemToRemove) {
+            const index = list.indexOf(itemToRemove);
+            if (index !== -1) {
+                list.splice(index, 1);
+                displayList();
+            }
+        }
+
+        function clearList() {
+            list = [];
+            displayList();
+        }
+    </script>
+</body>
+
+</html>
