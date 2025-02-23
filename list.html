@@ -10,7 +10,7 @@
             border-radius: 10%;
         }
 
-        .button:hover{
+        .button:hover {
             opacity: 0.7;
         }
 
@@ -24,19 +24,22 @@
             margin: auto;
             transform: translateY(0);
             transition: 0.2s;
-            button{
+
+            button {
                 opacity: 0;
             }
         }
-        li:hover{
+
+        li:hover {
             background-color: #666;
             color: white;
             transform: translateY(-10);
-            button{
+
+            button {
                 opacity: 1;
             }
         }
-        
+
         .full {
             width: 90%;
             height: 100%;
@@ -47,17 +50,19 @@
             flex-direction: column;
             align-items: center;
         }
-        
-        .deleteButton{
+
+        .deleteButton {
             float: right;
             height: 32px;
             border-radius: 10%;
             transition: 0.2s;
-            img{
+
+            img {
                 height: 25px;
             }
         }
-        .deleteButton:hover{
+
+        .deleteButton:hover {
             background-color: black;
         }
     </style>
@@ -72,7 +77,8 @@
             <button class="button" onclick="addItem()">Add</button>
             <ul id="itemList">
             </ul>
-            <button style="background-color: red; float: right;" class="button" onclick="clearList()">Clear List</button>
+            <button style="background-color: red; float: right;" class="button" onclick="clearList()">Clear
+                List</button>
         </div>
     </div>
     <script>
@@ -87,7 +93,7 @@
 
                 const deleteButton = document.createElement("button");
                 deleteButton.className = "deleteButton";
-                
+
                 const deleteImage = document.createElement("img");
                 deleteImage.src = "https://img.icons8.com/ios-filled/50/ff0000/trash.png";  // Image URL for the trash icon
                 deleteImage.alt = "Delete";
@@ -143,6 +149,13 @@
             list = [];
             displayList();
         }
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                addItem();
+            }
+        });
+
     </script>
 </body>
 
